@@ -1,0 +1,17 @@
+defaults: &defaults
+  ftp_host:             localhost
+  ftp_login:            ftpuser
+  ftp_password:         ftpuserpw
+  ftp_filename:         patents.csv
+
+development:
+  <<: *defaults
+  ftp_path:             /data/dev
+
+test:
+  <<: *defaults
+  ftp_path:             /data/test
+
+production:
+  <<: *defaults
+  ftp_path:             /data/prod

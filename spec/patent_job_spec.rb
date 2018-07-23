@@ -6,6 +6,7 @@ describe PatentJob do
     f = './patents.csv'
     downldr.should_receive(:download_file).once.and_return(f)
     @job = PatentJob.new(downldr)
+    # @job = PatentJob.new
     @job.run
     Patent.all.should have(3).rows
     Patent.find_by_name('Anti-Gravity Simulator').should be

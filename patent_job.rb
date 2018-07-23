@@ -4,7 +4,7 @@ require 'csv'
 class PatentJob
   attr_reader :downloader
 
-  def initialize(downloader=PatentDownloader.new)
+  def initialize(downloader=FtpDownloader.new)
     @downloader = downloader
   end
 
