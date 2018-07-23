@@ -1,23 +1,17 @@
 require_relative 'patent'
-require 'tempfile'
-require 'net/ftp'
 require 'csv'
 
 class PatentJob
-  def run
-    temp = download_file
-    rows = parse(temp)
-    update_patents(rows)
+  attr_reader :downloader
+
+  def initialize(downloader=PatentDownloader.new)
+    @downloader = downloader
   end
 
-  def download_file
-    temp = Tempfile.new('patents')
-    tempname = temp.path
-    temp.close
-    Net::FTP.open('localhost', user = 'foo', passwd = 'foopw') do |ftp|
-      ftp.getbinaryfile('/data/prod/patents.csv', tempname)
-    end
-    tempname
+  def run
+    temp = downloader.download_file
+    rows = parse(temp)
+    update_patents(rows)
   end
 
   def parse(temp)
