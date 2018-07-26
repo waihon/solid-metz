@@ -5,7 +5,7 @@ require_relative 'config'
 class FtpDownloader
   attr_reader :config
 
-  def initialize(config=Config.new(env: 'production', filename: 'patent.yml'))
+  def initialize(config)
     @config = config
   end
 

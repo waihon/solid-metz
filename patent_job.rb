@@ -4,8 +4,9 @@ require 'csv'
 class PatentJob
   attr_reader :downloader
 
-  def initialize(downloader=FtpDownloader.new)
-    @downloader = downloader
+  def initialize(opts = {})
+    config = opts[:config] ||= Config.new(env: 'production', filename: 'patent.yml')
+    @downloader = opts[:downloader] ||= FtpDownloader.new(config)
   end
 
   def run
