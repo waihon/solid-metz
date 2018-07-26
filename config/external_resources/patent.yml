@@ -3,6 +3,7 @@ defaults: &defaults
   ftp_login:            ftpuser
   ftp_password:         ftpuserpw
   ftp_filename:         patents.csv
+  downloader_class:     FtpDownloader
 
 development:
   <<: *defaults

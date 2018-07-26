@@ -1,12 +1,13 @@
 require_relative 'patent'
 require 'csv'
+require 'active_support/inflector'
 
 class PatentJob
   attr_reader :downloader
 
   def initialize(opts = {})
     config = opts[:config] ||= Config.new(env: 'production', filename: 'patent.yml')
-    @downloader = opts[:downloader] ||= FtpDownloader.new(config)
+    @downloader = opts[:downloader] ||= config.downloader_class.constantize.new(config)
   end
 
   def run
